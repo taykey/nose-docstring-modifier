@@ -1,3 +1,1 @@
-include nose_htmlmp/templates/*
 include README.md
-include CHANGES.md
