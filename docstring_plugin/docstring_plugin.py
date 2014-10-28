@@ -9,9 +9,9 @@ from nose.plugins import Plugin
 class DocString(Plugin):
 
     def describeTest(self, test):
-        return 'Modified docstring'
-        # test.test.__dict__['test' ].__doc__
-        # test.test.__dict__['keywords' ]
+        return '{0} # {1}'.format(test.test.__dict__['test'].keywords['id'],
+        test.test.__dict__['test'].__doc__)
+
 
     def options(self, parser, env=os.environ):
         super(DocString, self).options(parser, env)
@@ -27,5 +27,5 @@ class DocString(Plugin):
 
     def configure(self, options, conf):
         super(DocString, self).configure(options, conf)
-        suffixes = []
-        print 'no'
+        # TODO: parse options
+        pass
