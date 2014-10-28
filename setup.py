@@ -15,7 +15,8 @@ requires = [
 
 setup(name='nose-docstring',
       version='0.0.1',
-      description='logging plugin to create log per test',
+      description='Enables you to modify docstring of tests based on '
+                  'their attributes',
       long_description=README,
       classifiers=[
           "Development Status :: 0 - Beta",
