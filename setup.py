@@ -34,6 +34,6 @@ setup(name='nose-docstring',
       zip_safe=False,
       entry_points="""\
       [nose.plugins.0.10]
-      logpertest = logging_plugin:LogPerTest
+      docstring = docstring_plugin:DocString
       """,
       install_requires=requires)
