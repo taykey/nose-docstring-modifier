@@ -13,7 +13,7 @@ requires = [
     'nose',
 ]
 
-setup(name='nose-logpertest',
+setup(name='nose-docstring',
       version='0.0.1',
       description='logging plugin to create log per test',
       long_description=README,
