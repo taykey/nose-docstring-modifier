@@ -27,19 +27,21 @@ class DocString(Plugin):
 
         # remove empty strings resulted from unexusting keys
         self.prefix_info = filter(len, map(str, self.prefix_info))
+        prefix = ', '.join(self.prefix_info)
 
         for suffix in self.args['suffix']:
             self.suffix_info.append(keywords.get(suffix, ''))
 
         self.suffix_info = filter(len, map(str, self.suffix_info))
+        suffix = ', '.join(self.suffix_info)
 
         # prevent list mutation
         self.prefix_info = list()
         self.suffix_info = list()
 
-        return '({}) {} ({})'.format(', '.join(self.prefix_info),
+        return '({}) {} ({})'.format(prefix,
                                      running_test.test.__dict__['test'].__doc__,
-                                     ', '.join(self.suffix_info))
+                                     suffix)
 
     def options(self, parser, env=os.environ):
         super(DocString, self).options(parser, env)
