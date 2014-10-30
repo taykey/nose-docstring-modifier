@@ -1,7 +1,7 @@
 ### nose-docstring-plugin
 
 This plugin enables you to modify docstring of tests based on their attributes, for example:
-```
+```python
 @attr(section='section', type='functional+', module='module', id=1)
 def test_function(self):
     """
