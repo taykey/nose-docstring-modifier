@@ -26,7 +26,7 @@ class DocString(Plugin):
         for prefix in self.args['prefix']:
             prefix_info.append(keywords.get(prefix, ''))
 
-        # remove empty strings resulted from unexusting keys
+        # remove empty strings resulted from unexisting keys
         prefix_info = filter(len, map(str, prefix_info))
         prefix = ', '.join(prefix_info)
 
