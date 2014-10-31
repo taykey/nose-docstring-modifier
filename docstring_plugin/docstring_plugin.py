@@ -16,28 +16,25 @@ class DocString(Plugin):
     """
 
     args = dict()
-    prefix_info = list()
-    suffix_info = list()
 
     def describeTest(self, running_test):
+        prefix_info = list()
+        suffix_info = list()
+
         keywords = running_test.test.__dict__['test'].keywords
 
         for prefix in self.args['prefix']:
-            self.prefix_info.append(keywords.get(prefix, ''))
+            prefix_info.append(keywords.get(prefix, ''))
 
         # remove empty strings resulted from unexusting keys
-        self.prefix_info = filter(len, map(str, self.prefix_info))
-        prefix = ', '.join(self.prefix_info)
+        prefix_info = filter(len, map(str, prefix_info))
+        prefix = ', '.join(prefix_info)
 
         for suffix in self.args['suffix']:
-            self.suffix_info.append(keywords.get(suffix, ''))
+            suffix_info.append(keywords.get(suffix, ''))
 
-        self.suffix_info = filter(len, map(str, self.suffix_info))
-        suffix = ', '.join(self.suffix_info)
-
-        # prevent list mutation
-        self.prefix_info = list()
-        self.suffix_info = list()
+        suffix_info = filter(len, map(str, suffix_info))
+        suffix = ', '.join(suffix_info)
 
         return '({}) {} ({})'.format(prefix,
                                      running_test.test.__dict__['test'].__doc__,
@@ -49,11 +46,16 @@ class DocString(Plugin):
         parser.add_option(
             '--prefix', default='id,platform',
             help='Append to this flag list of attributes you want to be printed'
-                 'before the original docstring')
+                 'before the original docstring, separated by COMMA')
         parser.add_option(
             '--suffix', default='section,type,module',
             help='Append to this flag list of attributes you want to be printed'
-                 'after the original docstring')
+                 'after the original docstring, separated by COMMA')
+        parser.add_option(
+            '--replace',
+            help='Replace characters in original docstring, for example:'
+                 '--replace(a, A)'
+        )
 
     def configure(self, options, conf):
         super(DocString, self).configure(options, conf)
