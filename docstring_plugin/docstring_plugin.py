@@ -24,17 +24,21 @@ class DocString(Plugin):
         keywords = running_test.test.__dict__['test'].keywords
 
         for prefix in self.args['prefix']:
-            prefix_info.append(keywords.get(prefix, ''))
+            self.prefix_info.append(keywords.get(prefix, ''))
 
         # remove empty strings resulted from unexusting keys
-        prefix_info = filter(len, map(str, prefix_info))
-        prefix = ', '.join(prefix_info)
+        self.prefix_info = filter(len, map(str, self.prefix_info))
+        prefix = ', '.join(self.prefix_info)
 
         for suffix in self.args['suffix']:
             suffix_info.append(keywords.get(suffix, ''))
 
         suffix_info = filter(len, map(str, suffix_info))
         suffix = ', '.join(suffix_info)
+
+        # prevent list mutation
+        self.prefix_info = list()
+        self.suffix_info = list()
 
         return '({}) {} ({})'.format(prefix,
                                      running_test.test.__dict__['test'].__doc__,
