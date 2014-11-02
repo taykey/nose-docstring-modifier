@@ -13,7 +13,7 @@ requires = [
     'nose',
 ]
 
-setup(name='nose-docstring',
+setup(name='nose-docstring-affix',
       version='0.0.1',
       description='Enables you to modify docstring of tests based on '
                   'their attributes',
