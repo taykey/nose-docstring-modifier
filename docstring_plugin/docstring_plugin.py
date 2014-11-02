@@ -11,8 +11,9 @@ class DocString(Plugin):
     This plugin enables you to display attributes next to the original
     docstring.
 
-    Usage example:
-         > python main.py --with-docstring --prefix=platform,id --suffix=type
+    Usage examples:
+        > python main.py --with-docstring --prefix=platform,id --suffix=type
+        > python main.py --with-docstring --replace=a,A --suffix=id,section
     """
 
     args = dict()
