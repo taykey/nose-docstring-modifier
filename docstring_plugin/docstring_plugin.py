@@ -28,36 +28,38 @@ class DocString(Plugin):
 
         docstring = self._get_docstring(test)
 
-        return '({}) {} ({})'.format(prefix, docstring, suffix)
+        return '{}{}{}'.format(prefix, docstring, suffix)
 
     def options(self, parser, env=os.environ):
         super(DocString, self).options(parser, env)
 
         parser.add_option(
-            '--prefix', default='id,platform',
+            '--prefix',
             help='Append to this flag list of attributes you want to be printed'
-                 'before the original docstring, separated by COMMA')
+                 'before the original docstring, comma separated')
         parser.add_option(
-            '--suffix', default='section,type,module',
+            '--suffix',
             help='Append to this flag list of attributes you want to be printed'
-                 'after the original docstring, separated by COMMA')
+                 'after the original docstring, comma separated')
         parser.add_option(
             '--replace',
             help='Replace characters in original docstring, for example:'
-                 '--replace(a, A)'
+                 '--replace=a,A'
         )
 
     def configure(self, options, conf):
         super(DocString, self).configure(options, conf)
 
-        self.args['prefix'] = options.prefix.split(',')
-        self.args['suffix'] = options.suffix.split(',')
+        if options.prefix:
+            self.args['prefix'] = options.prefix.split(',')
+        if options.suffix:
+            self.args['suffix'] = options.suffix.split(',')
         if options.replace:
             self.args['replace'] = options.replace.split(',')
 
     def _get_affix(self, affix_type, running_test):
         """
-        Returns list containing affixes that should be appendind to docstring.
+        Returns list containing affixes that will be appended to docstring.
         :param affix_type: 'suffix' or 'prefix'
         :type affix_type: str
         :param running_test: contains meta information about the current test
@@ -65,16 +67,22 @@ class DocString(Plugin):
         """
         affix = list()
 
+        if not affix_type in self.args.keys():
+            return ''
+
         for key in self.args[affix_type]:
             affix.append(running_test.keywords.get(key, ''))
 
         # remove empty strings resulted from unexisting keys
         affix = filter(len, map(str, affix))
-        return ', '.join(affix)
+
+        align = '({}) ' if affix_type == 'prefix' else ' ({})'
+        return align.format(', '.join(affix))
 
     def _get_docstring(self, running_test):
         """
-        :return: modified docstring if --replace is toggled, original otherwise.
+        Returns modified docstring if --replace is toggled, original otherwise.
+        :return: modified docstring
         """
         docstring = running_test.__doc__
         if 'replace' in self.args.keys() and len(self.args['replace']) == 2:
