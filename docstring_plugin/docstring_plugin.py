@@ -74,7 +74,8 @@ class DocString(Plugin):
 
     def _get_docstring(self, running_test):
         """
-        :return: modified docstring if --replace is toggled, original otherwise.
+        Returns modified docstring if --replace is toggled, original otherwise.
+        :return: modified docstring
         """
         docstring = running_test.__doc__
         if 'replace' in self.args.keys() and len(self.args['replace']) == 2:
