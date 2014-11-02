@@ -57,7 +57,7 @@ class DocString(Plugin):
 
     def _get_affix(self, affix_type, running_test):
         """
-        Returns list containing affixes that should be appendind to docstring.
+        Returns list containing affixes that will be appended to docstring.
         :param affix_type: 'suffix' or 'prefix'
         :type affix_type: str
         :param running_test: contains meta information about the current test
