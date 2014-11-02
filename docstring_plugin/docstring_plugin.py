@@ -44,7 +44,7 @@ class DocString(Plugin):
         parser.add_option(
             '--replace',
             help='Replace characters in original docstring, for example:'
-                 '--replace(a, A)'
+                 '--replace=a,A'
         )
 
     def configure(self, options, conf):
