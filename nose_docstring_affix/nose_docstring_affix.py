@@ -22,7 +22,9 @@ class DocstringAffix(Plugin):
     def describeTest(self, running_test):
 
         # meta information about running test
-        test = running_test.test.__dict__['test']
+        test = running_test.test.__dict__.get('test', None)
+        if not test:
+            return
 
         prefix = self._get_affix('prefix', test)
         suffix = self._get_affix('suffix', test)
