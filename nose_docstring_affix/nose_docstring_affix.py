@@ -6,7 +6,7 @@ import os
 from nose.plugins import Plugin
 
 
-class DocString(Plugin):
+class DocstringAffix(Plugin):
     """
     This plugin enables you to display attributes next to the original
     docstring.
@@ -16,6 +16,7 @@ class DocString(Plugin):
         > python main.py --with-docstring --replace=a,A --suffix=id,section
     """
 
+    name = 'docstring-affix'
     args = dict()
 
     def describeTest(self, running_test):
@@ -31,7 +32,7 @@ class DocString(Plugin):
         return '{}{}{}'.format(prefix, docstring, suffix)
 
     def options(self, parser, env=os.environ):
-        super(DocString, self).options(parser, env)
+        super(DocstringAffix, self).options(parser, env)
 
         parser.add_option(
             '--prefix',
@@ -48,7 +49,7 @@ class DocString(Plugin):
         )
 
     def configure(self, options, conf):
-        super(DocString, self).configure(options, conf)
+        super(DocstringAffix, self).configure(options, conf)
 
         if options.prefix:
             self.args['prefix'] = options.prefix.split(',')
