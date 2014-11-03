@@ -12,7 +12,7 @@ def test_function(self):
 
 Running this with nosetest with docstring plugin:
 
-```> python main.py --with-docstring --prefix=id,section --suffix=type --replace=!!,.```
+```> python main.py --with-docstring--affix --prefix=id,section --suffix=type --replace=!!,.```
 
 will print 
 
