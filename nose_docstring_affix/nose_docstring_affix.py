@@ -12,8 +12,8 @@ class DocstringAffix(Plugin):
     docstring.
 
     Usage examples:
-        > python main.py --with-docstring --prefix=platform,id --suffix=type
-        > python main.py --with-docstring --replace=a,A --suffix=id,section
+      > python main.py --with-docstring-affix --prefix=platform,id --suffix=type
+      > python main.py --with-docstring-affix --replace=a,A --suffix=id,section
     """
 
     name = 'docstring-affix'
