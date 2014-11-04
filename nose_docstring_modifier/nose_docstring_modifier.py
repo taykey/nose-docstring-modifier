@@ -17,7 +17,6 @@ class DocstringModifier(Plugin):
     """
 
     name = 'docstring-modifier'
-    args = dict()
 
     def describeTest(self, running_test):
 
@@ -86,7 +85,7 @@ class DocstringModifier(Plugin):
         :return: modified docstring
         """
         docstring = running_test.__doc__
-        if hasattr(self, 'replace') and len(self.args['replace']) == 2:
-            return docstring.replace(self.args['replace'][0],
-                                     self.args['replace'][1])
+        if hasattr(self, 'replace') and len(self.replace) == 2:
+            return docstring.replace(self.replace[0], self.replace[1])
+
         return docstring
