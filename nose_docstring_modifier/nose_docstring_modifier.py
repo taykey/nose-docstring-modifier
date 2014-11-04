@@ -6,17 +6,17 @@ import os
 from nose.plugins import Plugin
 
 
-class DocstringAffix(Plugin):
+class DocstringModifier(Plugin):
     """
     This plugin enables you to display attributes next to the original
     docstring.
 
     Usage examples:
-      > python main.py --with-docstring-affix --prefix=platform,id --suffix=type
-      > python main.py --with-docstring-affix --replace=a,A --suffix=id,section
+      > python main.py --with-docstring-modifier --prefix=id --suffix=type
+      > python main.py --with-docstring-modifier --replace=a,A --suffix=id
     """
 
-    name = 'docstring-affix'
+    name = 'docstring-modifier'
     args = dict()
 
     def describeTest(self, running_test):
@@ -31,10 +31,10 @@ class DocstringAffix(Plugin):
 
         docstring = self._get_docstring(test)
 
-        return '{}{}{}'.format(prefix, docstring, suffix)
+        return '{} {} {}'.format(prefix, docstring, suffix).strip()
 
     def options(self, parser, env=os.environ):
-        super(DocstringAffix, self).options(parser, env)
+        super(DocstringModifier, self).options(parser, env)
 
         parser.add_option(
             '--prefix',
@@ -51,7 +51,7 @@ class DocstringAffix(Plugin):
         )
 
     def configure(self, options, conf):
-        super(DocstringAffix, self).configure(options, conf)
+        super(DocstringModifier, self).configure(options, conf)
 
         if options.prefix:
             self.args['prefix'] = options.prefix.split(',')
@@ -79,8 +79,7 @@ class DocstringAffix(Plugin):
         # remove empty strings resulted from unexisting keys
         affix = filter(len, map(str, affix))
 
-        align = '({}) ' if affix_type == 'prefix' else ' ({})'
-        return align.format(', '.join(affix))
+        return ', '.join(affix)
 
     def _get_docstring(self, running_test):
         """

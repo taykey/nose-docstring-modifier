@@ -13,7 +13,7 @@ requires = [
     'nose',
 ]
 
-setup(name='nose-docstring-affix',
+setup(name='nose-docstring-modifier',
       version='0.0.2',
       description='Enables you to modify docstring of tests based on '
                   'their attributes',
@@ -34,7 +34,7 @@ setup(name='nose-docstring-affix',
       zip_safe=False,
       entry_points = {
         'nose.plugins.0.10': [
-            'nose_docstring_affix = nose_docstring_affix:DocstringAffix'
+            'nose_docstring_modifier = nose_docstring_modifier:DocstringModifier'
             ]
         },
       install_requires=requires)
