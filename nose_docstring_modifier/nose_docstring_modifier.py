@@ -26,8 +26,11 @@ class DocstringModifier(Plugin):
         if not test:
             return
 
-        prefix = self._get_affix('prefix', test)
-        suffix = self._get_affix('suffix', test)
+        prefix_kws = self.__dict__.get('prefix', '')
+        suffix_kws = self.__dict__.get('suffix', '')
+
+        prefix = self._get_affix(prefix_kws, test)
+        suffix = self._get_affix(suffix_kws, test)
 
         docstring = self._get_docstring(test)
 
@@ -36,50 +39,46 @@ class DocstringModifier(Plugin):
     def options(self, parser, env=os.environ):
         super(DocstringModifier, self).options(parser, env)
 
+        def set_attrs(option, opt_str, value, parser):
+            setattr(self, option.dest, value.split(','))
+
         parser.add_option(
             '--prefix',
             help='Append to this flag list of attributes you want to be printed'
-                 'before the original docstring, comma separated')
+                 'before the original docstring, comma separated',
+            type=str,
+            action='callback',
+            callback=set_attrs)
         parser.add_option(
             '--suffix',
             help='Append to this flag list of attributes you want to be printed'
-                 'after the original docstring, comma separated')
+                 'after the original docstring, comma separated',
+            type=str,
+            action='callback',
+            callback=set_attrs)
         parser.add_option(
             '--replace',
             help='Replace characters in original docstring, for example:'
-                 '--replace=a,A'
-        )
+                 '--replace=a,A',
+            type=str,
+            action='callback',
+            callback=set_attrs)
 
-    def configure(self, options, conf):
-        super(DocstringModifier, self).configure(options, conf)
-
-        if options.prefix:
-            self.args['prefix'] = options.prefix.split(',')
-        if options.suffix:
-            self.args['suffix'] = options.suffix.split(',')
-        if options.replace:
-            self.args['replace'] = options.replace.split(',')
-
-    def _get_affix(self, affix_type, running_test):
+    def _get_affix(self, affix_kws, running_test):
         """
         Returns list containing affixes that will be appended to docstring.
-        :param affix_type: 'suffix' or 'prefix'
-        :type affix_type: str
+        :param affix_kws: affix_kws
+        :type affix_kws: list
         :param running_test: contains meta information about the current test
         :return: a list containing wanted affixes depending on 'affix_type'
         """
-        affix = list()
-
-        if not affix_type in self.args.keys():
-            return ''
-
-        for key in self.args[affix_type]:
-            affix.append(running_test.keywords.get(key, ''))
+        affix = [running_test.keywords.get(key, '') for key in affix_kws]
 
         # remove empty strings resulted from unexisting keys
         affix = filter(len, map(str, affix))
+        affix_str = ', '.join(affix)
 
-        return ', '.join(affix)
+        return '(' + affix_str + ')' if affix_str else ''
 
     def _get_docstring(self, running_test):
         """
@@ -87,7 +86,7 @@ class DocstringModifier(Plugin):
         :return: modified docstring
         """
         docstring = running_test.__doc__
-        if 'replace' in self.args.keys() and len(self.args['replace']) == 2:
+        if hasattr(self, 'replace') and len(self.args['replace']) == 2:
             return docstring.replace(self.args['replace'][0],
                                      self.args['replace'][1])
         return docstring
