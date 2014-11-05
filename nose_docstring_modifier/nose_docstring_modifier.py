@@ -29,9 +29,9 @@ class DocstringModifier(Plugin):
         prefix = self._get_affix(self.args.get('prefix', None), test)
         suffix = self._get_affix(self.args.get('suffix', None), test)
 
-        docstr = self._get_docstring(test)
+        docstring = self._get_docstring(test)
 
-        return '{} {} {}'.format(prefix, docstr, suffix).strip()
+        return '{} {} {}'.format(prefix, docstring, suffix).strip()
 
     def options(self, parser, env=os.environ):
         super(DocstringModifier, self).options(parser, env)
