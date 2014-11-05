@@ -17,7 +17,6 @@ class DocstringModifier(Plugin):
     """
 
     name = 'docstring-modifier'
-    args = dict()
 
     def describeTest(self, running_test):
 
@@ -26,8 +25,11 @@ class DocstringModifier(Plugin):
         if not test:
             return
 
-        prefix = self._get_affix(self.args.get('prefix', None), test)
-        suffix = self._get_affix(self.args.get('suffix', None), test)
+        prefix_list = self.conf.options.prefix
+        suffix_list = self.conf.options.suffix
+
+        prefix = self._get_affix(prefix_list, test)
+        suffix = self._get_affix(suffix_list, test)
 
         docstring = self._get_docstring(test)
 
@@ -50,16 +52,6 @@ class DocstringModifier(Plugin):
                  '--replace=a,A'
         )
 
-    def configure(self, options, conf):
-        super(DocstringModifier, self).configure(options, conf)
-
-        if options.prefix:
-            self.args['prefix'] = options.prefix.split(',')
-        if options.suffix:
-            self.args['suffix'] = options.suffix.split(',')
-        if options.replace:
-            self.args['replace'] = options.replace.split(',')
-
     @staticmethod
     def _get_affix(keywords, running_test):
         """
@@ -73,6 +65,8 @@ class DocstringModifier(Plugin):
         if not keywords:
             return ''
 
+        keywords = keywords.split(',')
+
         affix = [str(running_test.keywords.get(key, '')) for key in keywords]
         return '(' + ', '.join(filter(len, affix)) + ')'
 
@@ -83,7 +77,7 @@ class DocstringModifier(Plugin):
         :return: modified docstring
         """
         docstring = running_test.__doc__
-        replace_args = self.args.get('replace', '')
+        replace_args = (self.conf.options.replace or '').split(',')
 
         if len(replace_args) == 2:
             return docstring.replace(replace_args[0], replace_args[1])
