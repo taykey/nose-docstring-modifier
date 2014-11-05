@@ -14,7 +14,7 @@ requires = [
 ]
 
 setup(name='nose-docstring-modifier',
-      version='0.0.2',
+      version='0.0.3',
       description='Enables you to modify docstring of tests based on '
                   'their attributes',
       long_description=README,
