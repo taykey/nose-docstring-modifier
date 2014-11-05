@@ -26,8 +26,8 @@ class DocstringModifier(Plugin):
         if not test:
             return
 
-        prefix = self._get_affix('prefix', test)
-        suffix = self._get_affix('suffix', test)
+        prefix = self._get_affix(self.args.get('prefix', None), test)
+        suffix = self._get_affix(self.args.get('suffix', None), test)
 
         docstring = self._get_docstring(test)
 
@@ -60,34 +60,32 @@ class DocstringModifier(Plugin):
         if options.replace:
             self.args['replace'] = options.replace.split(',')
 
-    def _get_affix(self, affix_type, running_test):
+    @staticmethod
+    def _get_affix(keywords, running_test):
         """
         Returns list containing affixes that will be appended to docstring.
-        :param affix_type: 'suffix' or 'prefix'
-        :type affix_type: str
+
+        :param keywords: list of affix keywords
+        :type keywords: list
         :param running_test: contains meta information about the current test
         :return: a list containing wanted affixes depending on 'affix_type'
         """
-        affix = list()
-
-        if not affix_type in self.args.keys():
+        if not keywords:
             return ''
 
-        for key in self.args[affix_type]:
-            affix.append(running_test.keywords.get(key, ''))
-
-        # remove empty strings resulted from unexisting keys
-        affix = filter(len, map(str, affix))
-
-        return ', '.join(affix)
+        affix = [str(running_test.keywords.get(key, '')) for key in keywords]
+        return '(' + ', '.join(filter(len, affix)) + ')'
 
     def _get_docstring(self, running_test):
         """
         Returns modified docstring if --replace is toggled, original otherwise.
+
         :return: modified docstring
         """
         docstring = running_test.__doc__
-        if 'replace' in self.args.keys() and len(self.args['replace']) == 2:
-            return docstring.replace(self.args['replace'][0],
-                                     self.args['replace'][1])
+        replace_args = self.args.get('replace', '')
+
+        if len(replace_args) == 2:
+            return docstring.replace(replace_args[0], replace_args[1])
+
         return docstring
