@@ -19,7 +19,7 @@ setup(name='nose-docstring-modifier',
                   'their attributes',
       long_description=README,
       classifiers=[
-          "Development Status :: 0 - Beta",
+          "Development Status :: 4 - Beta",
           "Intended Audience :: Developers",
           "Operating System :: OS Independent",
           "Programming Language :: Python",
