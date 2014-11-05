@@ -1,5 +1,4 @@
-This plugin enables you to modify docstring of tests based on their attributes, the project is available on `GitHub <https://github.com/taykey/nose-docstring>`_.
-
+This plugin enables you to modify docstring of tests based on their attributes.
 ==========
 Installing
 ==========
