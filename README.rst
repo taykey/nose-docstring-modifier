@@ -36,3 +36,31 @@ will print
 .. code-block:: shell
 
     (1, MySection) ThiS iS the original docString (functional+) ... ok
+
+========
+Features
+========
+
+* Works with multiprocess plugin:
+
+.. code-block:: shell
+
+    nosetest --processes=10 -- process-restartworker with-docstring-modifier --prefix=id
+
+spreads test run among 10 processes, appending `id` attribute to each test.
+
+=======
+History
+=======
+
+0.0.4 (2014-11-06)
+------------------
+* Code design changes
+
+0.0.3 (2014-11-05)
+------------------
+* Multiprocessing support
+
+0.0.2 (2014-11-04)
+------------------
+* Initial release

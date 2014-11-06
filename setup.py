@@ -7,14 +7,14 @@ from setuptools import setup, find_packages
 
 ROOT = os.path.abspath(os.path.dirname(__file__))
 
-README = open(os.path.join(ROOT, 'README.md')).read()
+README = open(os.path.join(ROOT, 'README.rst')).read()
 
 requires = [
     'nose',
 ]
 
 setup(name='nose-docstring-modifier',
-      version='0.0.3',
+      version='0.0.4',
       description='Enables you to modify docstring of tests based on '
                   'their attributes',
       long_description=README,
