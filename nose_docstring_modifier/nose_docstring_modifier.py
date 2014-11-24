@@ -53,21 +53,21 @@ class DocstringModifier(Plugin):
         )
 
     @staticmethod
-    def _get_affix(keywords, running_test):
+    def _get_affix(func_dict, running_test):
         """
         Returns list containing affixes that will be appended to docstring.
 
-        :param keywords: list of affix keywords
-        :type keywords: list
+        :param func_dict: list of affix keywords
+        :type func_dict: list
         :param running_test: contains meta information about the current test
         :return: a list containing wanted affixes depending on 'affix_type'
         """
-        if not keywords:
+        if not func_dict:
             return ''
 
-        keywords = keywords.split(',')
+        func_dict = func_dict.split(',')
 
-        affix = [str(running_test.keywords.get(key, '')) for key in keywords]
+        affix = [str(running_test.func_dict.get(key, '')) for key in func_dict]
         return '(' + ', '.join(filter(len, affix)) + ')'
 
     def _get_docstring(self, running_test):
