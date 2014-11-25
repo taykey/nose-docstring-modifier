@@ -55,8 +55,8 @@ class DocstringModifier(Plugin):
                  'after the original docstring, comma separated')
         parser.add_option(
             '--replace',
-            help='Replace characters in original docstring, for example:'
-                 '--replace=a,A')
+            help="Replace characters in original docstring, for example:"
+                 "--replace=('a','A')")
         parser.add_option(
             '--first-line', action="store_true",
             help='Prints only the first line of the docstring'
