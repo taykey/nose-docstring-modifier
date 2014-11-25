@@ -13,8 +13,8 @@ class DocstringModifier(Plugin):
     docstring.
 
     Usage examples:
-      > python main.py --with-docstring-modifier --prefix=id --suffix=type
-      > python main.py --with-docstring-modifier --replace=('a','A') --suffix=id
+      > nosetest --with-docstring-modifier --prefix=id,section --suffix=type
+      > nosetest --with-docstring-modifier --replace=('a','A') --first-line
     """
 
     name = 'docstring-modifier'
