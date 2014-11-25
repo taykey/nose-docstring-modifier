@@ -53,6 +53,10 @@ spreads test run among 10 processes, appending `id` attribute to each test.
 History
 =======
 
+0.0.6 (2014-11-25)
+------------------
+* Added ability to display only first line of docstring, changed the way `--replace` called
+
 0.0.5 (2014-11-24)
 ------------------
 * HOTFIX - Fixed a bug that caused an error when running the plugin due to dependency with another upcoming plugin
