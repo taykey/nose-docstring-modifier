@@ -99,13 +99,7 @@ class DocstringModifier(Plugin):
         if not match:
             return docstring
 
-        replace_args = self.conf.options.replace.split(',')
-
-        replace_list = [match.group(1), match.group(2)]
-        if len(replace_args) == 2:
-            return docstring.replace(replace_list[0], replace_list[1])
-
-        return docstring
+        return docstring.replace(match.group(1), match.group(2))
 
     def _get_first_line(self, docstring):
         """
