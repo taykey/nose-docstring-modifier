@@ -55,7 +55,8 @@ History
 
 0.0.6 (2014-11-25)
 ------------------
-* Added ability to display only first line of docstring, changed the way `--replace` called
+* Added ability to display only first line of docstring
+* Changed the way `--replace` called: `--replace=('s','S')`
 
 0.0.5 (2014-11-24)
 ------------------
