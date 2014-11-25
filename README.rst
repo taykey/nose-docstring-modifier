@@ -53,6 +53,10 @@ spreads test run among 10 processes, appending `id` attribute to each test.
 History
 =======
 
+0.0.5 (2014-11-24)
+------------------
+* HOTFIX - Fixed a bug that caused an error when running the plugin due to dependency with another upcoming plugin
+
 0.0.4 (2014-11-06)
 ------------------
 * Code design changes
