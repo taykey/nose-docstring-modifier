@@ -56,7 +56,10 @@ History
 0.0.6 (2014-11-25)
 ------------------
 * Added ability to display only first line of docstring
-* Changed the way `--replace` called: `--replace=('s','S')`
+* Changed the way `--replace` called to:
+.. code-block:: shell
+
+    --replace=('s','S')
 
 0.0.5 (2014-11-24)
 ------------------
