@@ -1,10 +1,10 @@
-This plugin enables you to modify docstring of tests based on their attributes.
+Enables you to modify docstring of tests based on their attributes
 
 ==========
 Installing
 ==========
 
-You can install `nose-docstring-modifier` plugin using pip:
+You can install `nose-docstring-modifier` plugin using `pip`:
 
 .. code-block:: shell
 
@@ -25,11 +25,11 @@ Given the following test function:
         """
         ok_(True)
 
-running it with nosetest using nose-docstring-modifier plugin:
+running it with `nosetest` using `nose-docstring-modifier` plugin:
 
 .. code-block:: shell
 
-    nosetest --with-docstring-modifier --prefix=id,section --suffix=type --replace=s,S
+    nosetest --with-docstring-modifier --prefix=id,section --suffix=type --replace=('s','S')
 
 will print
 
@@ -45,26 +45,22 @@ Features
 
 .. code-block:: shell
 
-    nosetest --processes=10 -- process-restartworker with-docstring-modifier --prefix=id
+    nosetest --processes=10 --process-restartworker with-docstring-modifier --prefix=id
 
 spreads test run among 10 processes, appending `id` attribute to each test.
 
-=======
-History
-=======
+========
+Authors
+========
 
-0.0.5 (2014-11-24)
-------------------
-* HOTFIX - Fixed a bug that caused an error when running the plugin due to dependency with another upcoming plugin
+:Authors:
+    Maroun Maroun
+:Contributors:
+    Tal Ben Basat
 
-0.0.4 (2014-11-06)
-------------------
-* Code design changes
+    Nicole Franco
 
-0.0.3 (2014-11-05)
-------------------
-* Multiprocessing support
+    Roy Klinger
 
-0.0.2 (2014-11-04)
-------------------
-* Initial release
+    Sergey Ragatsky
+:Version: 0.0.6
