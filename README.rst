@@ -49,6 +49,10 @@ Features
 
 spreads test run among 10 processes, appending `id` attribute to each test.
 
+========
+Authors
+========
+
 :Authors:
     Maroun Maroun
 :Contributors:
