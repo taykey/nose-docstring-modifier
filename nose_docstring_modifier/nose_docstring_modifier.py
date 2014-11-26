@@ -1,5 +1,5 @@
 __author__ = 'maroun'
-
+__version__ = '0.0.6'
 
 import os
 import re
@@ -87,7 +87,7 @@ class DocstringModifier(Plugin):
 
     def _get_replaced_docstring(self, docstring):
         """
-        Returns modified docstring if --replace is toggled, original otherwise.
+        Returns modified docstring if --replace is enabled, original otherwise.
 
         :return: modified docstring
         """
@@ -103,7 +103,7 @@ class DocstringModifier(Plugin):
 
     def _get_first_line(self, docstring):
         """
-        Returns first line of the docstring if --first-line is toggled, original
+        Returns first line of the docstring if --first-line is enabled, original
         otherwise.
 
         :return: first line of docstring
