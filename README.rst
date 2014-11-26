@@ -49,26 +49,14 @@ Features
 
 spreads test run among 10 processes, appending `id` attribute to each test.
 
-=======
-History
-=======
+:Authors:
+    Maroun Maroun
+:Contributors:
+    Tal Ben Basat
 
-0.0.6 (2014-11-25)
-------------------
-* Added ability to display only first line of docstring, changed the way `--replace` called
+    Nicole Franco
 
-0.0.5 (2014-11-24)
-------------------
-* HOTFIX - Fixed a bug that caused an error when running the plugin due to dependency with another upcoming plugin
+    Roy Klinger
 
-0.0.4 (2014-11-06)
-------------------
-* Code design changes
-
-0.0.3 (2014-11-05)
-------------------
-* Multiprocessing support
-
-0.0.2 (2014-11-04)
-------------------
-* Initial release
+    Sergey Ragatsky
+:Version: 0.0.6
